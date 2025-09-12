@@ -1,8 +1,5 @@
 {
   "functions": {
-    "app/api/**": {
-      "runtime": "nodejs20.x",
-      "maxDuration": 30
-    }
+    "api/**/*.py": { "runtime": "python3.9" }
   }
 }
