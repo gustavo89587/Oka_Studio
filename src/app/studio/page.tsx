@@ -11,6 +11,11 @@ const PRESETS: { key: Preset; label: string; hint: string }[] = [
 
 type JobState = "idle" | "running" | "done" | "error";
 
+export default function Page() {
+  return <div style={{padding:20}}>Studio OK ✅</div>;
+}
+
+
 export default function Studio() {
   const [preset, setPreset] = useState<Preset>("VERTICAL_9_16");
   const [text, setText] = useState("Título forte + CTA. Escreva seu roteiro aqui.");
