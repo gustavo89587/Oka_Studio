@@ -1,6 +1,8 @@
-
 import { useMemo, useRef, useState } from "react";
 
+export default function Page() {
+  return <div style={{ padding: 24, fontSize: 18 }}>Studio OK ✅</div>;
+}
 type Preset = "VERTICAL_9_16" | "SQUARE_1_1" | "PORTRAIT_4_5" | "LANDSCAPE_16_9";
 const PRESETS: { key: Preset; label: string; hint: string }[] = [
   { key: "VERTICAL_9_16", label: "Shorts/TikTok/Reels", hint: "1080×1920" },
@@ -11,12 +13,7 @@ const PRESETS: { key: Preset; label: string; hint: string }[] = [
 
 type JobState = "idle" | "running" | "done" | "error";
 
-export default function Page() {
-  return <div style={{padding:20}}>Studio OK ✅</div>;
-}
-
-
-export default function Studio() {
+function Studio() {
   const [preset, setPreset] = useState<Preset>("VERTICAL_9_16");
   const [text, setText] = useState("Título forte + CTA. Escreva seu roteiro aqui.");
   const [prompt, setPrompt] = useState("samurai cyberpunk neon, ultra detailed, cinematic lighting");
@@ -173,3 +170,5 @@ export default function Studio() {
     </div>
   );
 }
+
+export { Studio };
