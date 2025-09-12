@@ -19,15 +19,16 @@
       "@/*": ["./*"]
     },
 
-    "plugins": [
-      { "name": "next" }
-    ]
+    "plugins": [{ "name": "next" }]
   },
   "include": [
     "next-env.d.ts",
     ".next/types/**/*.ts",
-    "**/*.ts",
-    "**/*.tsx"
+    "app/**/*",
+    "components/**/*",
+    "lib/**/*",
+    "pages/**/*",
+    "scripts/**/*"
   ],
-  "exclude": ["node_modules"]
+  "exclude": ["node_modules", "mobile"]
 }
