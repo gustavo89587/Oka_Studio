@@ -8,11 +8,11 @@ dist/
 
 # Python
 venv/
-.env
 __pycache__/
 *.pyc
+*.pyo
 
-# Pesados (não versionar)
+# Mídia pesada e binários
 *.mp4
 *.mov
 *.mkv
@@ -21,6 +21,6 @@ __pycache__/
 *.dll
 *.lib
 
-# Assets gerados
+# Gerados / locais
 assets/bg/**
 assets/music/**

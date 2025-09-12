@@ -1,4 +1,4 @@
-# Node / Next
+# Node / Next builds
 node_modules/
 .next/
 out/
@@ -6,17 +6,15 @@ build/
 dist/
 *.log
 
-# Python / scripts
+# Python / scripts locais (não são funções do Vercel)
 venv/
 __pycache__/
 *.py
 *.bat
-
-# Workers que não devem ir pro deploy
 oka_core/
 worker/
 
-# Assets pesados
+# Mídia pesada
 *.mp4
 *.mov
 *.mkv
@@ -24,3 +22,5 @@ worker/
 *.mp3
 *.dll
 *.lib
+assets/bg/**
+assets/music/**
