@@ -1,0 +1,26 @@
+# Node / Next
+node_modules/
+.next/
+out/
+build/
+dist/
+*.log
+
+# Python / scripts
+venv/
+__pycache__/
+*.py
+*.bat
+
+# Workers que não devem ir pro deploy
+oka_core/
+worker/
+
+# Assets pesados
+*.mp4
+*.mov
+*.mkv
+*.wav
+*.mp3
+*.dll
+*.lib
