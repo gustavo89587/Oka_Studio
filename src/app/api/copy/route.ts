@@ -1,27 +1,33 @@
-import { NextResponse } from "next/server";
-import { generateCopy, type Platform } from "@/lib/finch";
+import OpenAI from 'openai';
+import { NextRequest } from 'next/server';
 
-function cors(res: NextResponse) {
-  res.headers.set("Access-Control-Allow-Origin", "*"); // pode restringir depois
-  res.headers.set("Access-Control-Allow-Methods", "POST, OPTIONS");
-  res.headers.set("Access-Control-Allow-Headers", "Content-Type, Authorization");
-  return res;
-}
 
-export async function OPTIONS() {
-  return cors(new NextResponse(null, { status: 204 }));
-}
+export const runtime = 'nodejs';
+export const dynamic = 'force-dynamic';
+export const maxDuration = 60;
 
-export async function POST(req: Request) {
-  try {
-    const { topic, platform } = await req.json();
-    const valid = new Set<Platform>(["LinkedIn","Instagram","YouTube shorts","TikTok"]);
-    if (!topic || !platform || !valid.has(platform)) {
-      return cors(NextResponse.json({ error: "topic ou platform inválidos" }, { status: 400 }));
-    }
-    const text = generateCopy(topic, platform as Platform);
-    return cors(NextResponse.json({ ok: true, text }));
-  } catch (e: any) {
-    return cors(NextResponse.json({ ok: false, error: e?.message || "erro" }, { status: 500 }));
-  }
+
+export async function POST(req: NextRequest) {
+const key = process.env.OPENAI_API_KEY;
+if (!key) return new Response(JSON.stringify({ error: 'Missing OPENAI_API_KEY' }), { status: 500 });
+const { topic, format } = await req.json();
+
+
+const openai = new OpenAI({ apiKey: key });
+const system = `Você é um copywriter de cibersegurança e tecnologia. Entregue copy em JSON com: title, hook, script, cta, hashtags.`;
+
+
+const completion = await openai.chat.completions.create({
+model: 'gpt-4o-mini',
+messages: [
+{ role: 'system', content: system },
+{ role: 'user', content: `Crie uma copy para ${format}. Tema: ${topic}. Responda em JSON.` },
+],
+response_format: { type: 'json_object' },
+temperature: 0.7,
+});
+
+
+const content = completion.choices[0].message.content ?? '{}';
+return new Response(content, { headers: { 'Content-Type': 'application/json' } });
 }

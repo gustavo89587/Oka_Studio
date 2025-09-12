@@ -1,46 +1,42 @@
-// src/app/studio/page.tsx
 "use client";
+import { useMemo, useRef, useState } from 'react';
 
-import { useState, useRef, useMemo } from "react";
+
+type SizePreset = '1080x1920' | '1920x1080' | '1080x1080' | '1350x1080';
+
+
+const SIZE_MAP: Record<string, SizePreset> = {
+'Shorts/TikTok/Reels (9:16)': '1080x1920',
+'YouTube 16:9': '1920x1080',
+'Feed 1:1': '1080x1080',
+'Feed 4:5': '1350x1080',
+};
+
 
 export default function Page() {
-  const inputRef = useRef<HTMLInputElement | null>(null);
-  const [text, setText] = useState("");
-  const charCount = useMemo(() => text.length, [text]);
+const inputRef = useRef<HTMLInputElement | null>(null);
+const [format, setFormat] = useState<string>('Shorts/TikTok/Reels (9:16)');
+const [text, setText] = useState('Fala, Gustavo! Este é um teste do Oka Studio.');
+const [subStyle, setSubStyle] = useState<'finch' | 'impacto' | 'basic'>('finch');
+const [duration, setDuration] = useState<number>(30);
+const [fps, setFps] = useState<number>(30);
+const [bgVideo, setBgVideo] = useState<File | null>(null);
+const [bgImage, setBgImage] = useState<File | null>(null);
+const [status, setStatus] = useState<string>('Pronto.');
 
-  return (
-    <div style={{ padding: 24, fontSize: 18 }}>
-      <h1 style={{ fontWeight: 700, fontSize: 24, marginBottom: 12 }}>Oka Studio</h1>
-      <p style={{ opacity: 0.8, marginBottom: 12 }}>Studio OK ✅ — client component carregado.</p>
 
-      <div style={{ display: "flex", gap: 8 }}>
-        <input
-          ref={inputRef}
-          value={text}
-          placeholder="Digite um texto de teste…"
-          onChange={(e) => setText(e.target.value)}
-          style={{
-            flex: 1,
-            padding: 10,
-            border: "1px solid #ddd",
-            borderRadius: 8,
-          }}
-        />
-        <button
-          onClick={() => inputRef.current?.focus()}
-          style={{
-            padding: "10px 14px",
-            borderRadius: 8,
-            border: "1px solid #ddd",
-            background: "#f8f8f8",
-            cursor: "pointer",
-          }}
-        >
-          Focar
-        </button>
-      </div>
+const charCount = useMemo(() => text.length, [text]);
 
-      <div style={{ marginTop: 10, opacity: 0.7 }}>Caracteres: {charCount}</div>
-    </div>
-  );
+
+async function handleTTS() {
+setStatus('Gerando áudio...');
+const res = await fetch('/api/tts', {
+method: 'POST',
+headers: { 'Content-Type': 'application/json' },
+body: JSON.stringify({ text }),
+});
+if (!res.ok) { setStatus('Erro no TTS'); return; }
+const blob = await res.blob();
+const url = URL.createObjectURL(blob);
+const a = document.createElement('a');
 }
