@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">Oka Studio</string>
+    <string name="title_activity_main">Oka Studio</string>
+    <string name="package_name">com.okastudio.app</string>
+    <string name="custom_url_scheme">com.okastudio.app</string>
+</resources>

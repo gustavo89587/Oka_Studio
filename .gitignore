@@ -1,0 +1,26 @@
+﻿# Node / Next
+node_modules/
+.next/
+out/
+build/
+dist/
+*.log
+
+# Python
+venv/
+.env
+__pycache__/
+*.pyc
+
+# Pesados (não versionar)
+*.mp4
+*.mov
+*.mkv
+*.wav
+*.mp3
+*.dll
+*.lib
+
+# Assets gerados
+assets/bg/**
+assets/music/**

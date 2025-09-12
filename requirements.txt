@@ -1,0 +1,16 @@
+httpx
+rich
+python-dotenv
+moviepy
+ffmpeg-python
+elevenlabs
+fastapi
+uvicorn
+starlette
+pydantic
+python-multipart
+diffusers
+transformers
+accelerate
+safetensors
+torch
